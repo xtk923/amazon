@@ -31,7 +31,8 @@ def calculate_savings_matrix(problem, drone, wind):
                 savings_matrix[i,j] = 0
     return savings_matrix
 
-def _clarke_and_wright_init(problem, drone, wind, name="Unnamed solution"):
+
+def _clarke_and_wright_init(problem, drone, wind, name = 'Unnamed solution'):
     # This function is used to initialize the Clarke and Wright algorithm.
     # This function should calculate the savings matrix
     # and store it in an instance of class Solution.
@@ -60,6 +61,17 @@ def _get_clients_pair_from_arg(clients_list, arg_k):
     client_j = arg_k % number_of_clients
     return clients_list[client_i], clients_list[client_j]
 
+def sequential_merge_if_possible(current_delivery, candidate_delivery):
+    # This function merges two deliveries if possible in the sequential version of Clarke and Wright (ie the two
+    # deliveries MUST have a common client at their borders)
+    # It returns True if the two deliveries have been merged and False otherwise.
+    can_merge = current_delivery.can_merge(candidate_delivery, True)
+    if can_merge[0]: # can_merge_left
+        current_delivery.merge_left(candidate_delivery, update=False)
+    elif can_merge[1]:
+        current_delivery.merge_right(candidate_delivery, update=False)
+    return can_merge[0] or can_merge[1]
+
 
 def _sequential_merge_if_possible(current_delivery, candidate_delivery):
     # This function merges two deliveries if possible in the sequential version of Clarke and Wright (ie the two
@@ -77,6 +89,51 @@ def _sequential_build_deliveries(sorted_savings, arg_sorted_savings, clients_lis
     # This function should return a list of instances of class Delivery calculated with the use of the sequential Clarke
     # and Wright algorithm.
     deliveries_list = []
+    # create a list of indices to track whether a pair of clients is added to one of the deliveries
+    idx_list = list(range(len(sorted_savings)))
+    # we need to check from the highest saving
+    idx_list.reverse()
+    have_positive_savings = True
+    some_can_merge = True
+
+    # the process should continue unless any of the three conditions is met
+    # 1) all clients are added to some delivery
+    # 2) all clients left give negative total_savings when joined
+    # 3) no more merge can be made from the rest of the clients_list
+    while len(idx_list) !=0 and have_positive_savings and some_can_merge:
+        # initiate a current_delivery
+        current_delivery = Delivery(depot= depot, drone= drone, wind = wind)
+
+        have_positive_savings = False
+        some_can_merge = False
+
+        for i in idx_list:
+            # only join those that give positive savings
+            if sorted_savings[i] >0:
+                have_positive_savings = True
+                # initiate a candidate_delivery
+                candidate_delivery = Delivery(depot= depot, drone= drone, wind = wind)
+                # extract the pair of clients
+                pair = list(_get_clients_pair_from_arg(clients_list, arg_sorted_savings[i]))
+                # append the two clients found to its clients_list
+                candidate_delivery.clients_list = pair
+                # try to merge
+                if _sequential_merge_if_possible(current_delivery, candidate_delivery):
+                    some_can_merge = True
+        # only append the delivery to the deliveries_list after checked through all the client pairs.
+        deliveries_list.append(current_delivery)
+
+        # remove the indices that concern clients already in the deliveries
+        len_deli = 0
+        for deli in deliveries_list:
+            len_deli += len(deli.clients_list)
+        # because a for loop will skip item if the item evaluated is removed, we need to keep evaluating until the requirement is met
+        while len(idx_list) > (len(clients_list) - len_deli)**2:
+            for i in idx_list:
+                pair = list(_get_clients_pair_from_arg(clients_list, arg_sorted_savings[i]))
+                if pair[0] in deliveries_list[-1].clients_list or pair[1] in deliveries_list[-1].clients_list:
+                        idx_list.remove(i)
+
     return deliveries_list
 
 
@@ -117,7 +174,18 @@ def add_single_client_deliveries(problem, deliveries_list, drone, wind):
     # This function should modify the deliveries_list argument by adding deliveries containing a single client.
     # Only clients that are not present in any delivery should be added. One have to check first that the client
     # can actually be delivered (the demand of the client do not exceed the capacity of the drone)
-    pass
+    for client in problem.clients_list:
+        single_client = True
+        # check if the clients is in any of the deliveries
+        for delivery in deliveries_list:
+            # if yes, it should not be put in a delivery as a single client
+            if client in delivery.clients_list:
+                single_client = False
+                break
+        # if no delivery contains this client, create a delivery with this client only, and add it to the deliveries_list
+        if single_client:
+            delivery = Delivery(clients_list= [client], depot= problem.depot, drone= drone, wind = wind)
+            deliveries_list.append(delivery)
 
 
 def clarke_and_wright(problem, drone, wind, version="Sequential", name=None):

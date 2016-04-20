@@ -1,51 +1,46 @@
 
 __init__.py,0
 
-main.py,150
+main.py,43
 from unit_tests.test import testtest4,87
-problem = Problem()problem9,129
-drone100 = Drone(capacity=100)drone10011,184
-wind = Wind()wind12,216
 
-myUnit_test.py,3125
-from unit_tests.test import testtest4,84
-import unittestunittest5,117
-class MyUnit_Test(unittest.TestCase):MyUnit_Test7,134
-    def setUp(self):setUp8,172
-    def equal2(self, a,b):equal283,4279
-    def test_Wind_calculate_force_direction(self):test_Wind_calculate_force_direction91,4459
-    def test_Wind_calculate_xy(self):test_Wind_calculate_xy98,4714
-    def test_cost(self):test_cost107,4952
-    def test_Point_cost(self):test_Point_cost118,5369
-    def test_Drone_cost(self):test_Drone_cost126,5678
-    def test_Delivery_calcualte_total_demand(self):test_Delivery_calcualte_total_demand136,6028
-    def test_Delivery_calcualte_total_cost(self):test_Delivery_calcualte_total_cost148,6555
-    def test_Delivery_calcualte_total_savings(self):test_Delivery_calcualte_total_savings163,7396
-    def test_Delivery_set_depot(self):test_Delivery_set_depot182,8632
-    def test_Delivery_set_client(self):test_Delivery_set_client188,8828
-    def test_Delivery_set_drone(self):test_Delivery_set_drone197,9275
-    def test_Delivery_attribute_wind(self):test_Delivery_attribute_wind203,9470
-    def test_Delivery_attribute_total_cost(self):test_Delivery_attribute_total_cost209,9665
-    def test_Delivery_attribute_total_savings(self):test_Delivery_attribute_total_savings219,10167
-    def test_Delivery_check_same_depot(self):test_Delivery_check_same_depot233,10829
-    def test_Delivery_check_same_drone(self):test_Delivery_check_same_drone237,10983
-    def test_Delivery_check_same_wind(self):test_Delivery_check_same_wind247,11403
-    def test_Delivery_check_max_demand(self):test_Delivery_check_max_demand258,11807
-    def test_Delivery_can_merge_left(self):test_Delivery_can_merge_left263,12034
-    def test_Delivery_can_merge_right(self):test_Delivery_can_merge_right286,13168
-    def test_Delivery_merge_left_no_common_client_update(self):test_Delivery_merge_left_no_common_client_update310,14334
-    def test_Delivery_merge_left_no_common_client_no_update(self):test_Delivery_merge_left_no_common_client_no_update347,17289
-    def test_Delivery_merge_left_common_client(self):test_Delivery_merge_left_common_client373,19007
-    def test_Delivery_merge_right_no_common_client(self):test_Delivery_merge_right_no_common_client389,19642
-    def test_Delivery_merge_right_common_client(self):test_Delivery_merge_right_common_client439,22847
-    def test_Solution_calculate_total_cost(self):test_Solution_calculate_total_cost453,23478
-    def test_Solution_calculate_total_savings(self):test_Solution_calculate_total_savings463,23943
-    def test_Problem_calculate_total_demand(self):test_Problem_calculate_total_demand473,24439
-    def test_Problem_generate_random_clients(self):test_Problem_generate_random_clients478,24638
-    def test_calculate_cost_matrix(self):test_calculate_cost_matrix499,25402
-    def test_calculate_savings_matrix(self):test_calculate_savings_matrix519,26695
-    def test_clarke_and_wright_init(self):test_clarke_and_wright_init541,27793
-    def test_sequential_build_deliveries(self):test_sequential_build_deliveries598,29810
+myUnit_test.py,3004
+import unittestunittest4,84
+class MyUnit_Test(unittest.TestCase):MyUnit_Test16,111
+    def setUp(self):setUp17,149
+    def equal2(self, a,b):equal292,4256
+    def test_Wind_calculate_force_direction(self):test_Wind_calculate_force_direction100,4436
+    def test_Wind_calculate_xy(self):test_Wind_calculate_xy107,4691
+    def test_cost(self):test_cost116,4929
+    def test_Point_cost(self):test_Point_cost127,5346
+    def test_Drone_cost(self):test_Drone_cost135,5655
+    def test_Delivery_calcualte_total_demand(self):test_Delivery_calcualte_total_demand145,6005
+    def test_Delivery_calcualte_total_cost(self):test_Delivery_calcualte_total_cost157,6532
+    def test_Delivery_calcualte_total_savings(self):test_Delivery_calcualte_total_savings172,7373
+    def test_Delivery_set_depot(self):test_Delivery_set_depot191,8609
+    def test_Delivery_set_client(self):test_Delivery_set_client197,8792
+    def test_Delivery_set_drone(self):test_Delivery_set_drone206,9226
+    def test_Delivery_attribute_wind(self):test_Delivery_attribute_wind212,9408
+    def test_Delivery_attribute_total_cost(self):test_Delivery_attribute_total_cost218,9590
+    def test_Delivery_attribute_total_savings(self):test_Delivery_attribute_total_savings228,10079
+    def test_Delivery_check_same_depot(self):test_Delivery_check_same_depot242,10728
+    def test_Delivery_check_same_drone(self):test_Delivery_check_same_drone246,10882
+    def test_Delivery_check_same_wind(self):test_Delivery_check_same_wind256,11302
+    def test_Delivery_check_max_demand(self):test_Delivery_check_max_demand267,11706
+    def test_Delivery_can_merge_left(self):test_Delivery_can_merge_left272,11933
+    def test_Delivery_can_merge_right(self):test_Delivery_can_merge_right295,13007
+    def test_Delivery_merge_left_no_common_client_update(self):test_Delivery_merge_left_no_common_client_update319,14113
+    def test_Delivery_merge_left_no_common_client_no_update(self):test_Delivery_merge_left_no_common_client_no_update356,17068
+    def test_Delivery_merge_left_common_client(self):test_Delivery_merge_left_common_client382,18786
+    def test_Delivery_merge_right_no_common_client(self):test_Delivery_merge_right_no_common_client398,19421
+    def test_Delivery_merge_right_common_client(self):test_Delivery_merge_right_common_client448,22256
+    def test_Solution_calculate_total_cost(self):test_Solution_calculate_total_cost462,22863
+    def test_Solution_calculate_total_savings(self):test_Solution_calculate_total_savings472,23328
+    def test_Problem_calculate_total_demand(self):test_Problem_calculate_total_demand482,23824
+    def test_Problem_generate_random_clients(self):test_Problem_generate_random_clients487,24023
+    def test_calculate_cost_matrix(self):test_calculate_cost_matrix508,24787
+    def test_calculate_savings_matrix(self):test_calculate_savings_matrix528,26080
+    def test_sequential_build_deliveries(self):test_sequential_build_deliveries613,29446
 
 post_processing.py,414
 import matplotlib.pyplot as pltmatplotlib2,30
@@ -55,135 +50,116 @@ def plot_solution(solution, ax, color):plot_solution33,1479
 def _get_random_color(color_list, number_of_generated_candidates=10):_get_random_color60,2646
 def plot_problem_solutions(problem, ax=None, plot_demand=True):plot_problem_solutions78,3587
 
-pre_processing.py,7490
+pre_processing.py,5832
 import numpy as npnp1,0
 import syssys2,20
 CELL_SEPARATOR = ";"CELL_SEPARATOR4,34
 def cost(point_a, point_b, drone, wind):cost7,60
 class Wind:Wind25,1649
     def __init__(self, x=None, y=None, force=None, direction=None):__init__26,1662
-    def _get_x(self):_get_x35,2000
-    def _set_x(self, x):_set_x38,2049
-    def _get_y(self):_get_y42,2140
-    def _set_y(self, y):_set_y45,2189
-    def _get_force(self):_get_force49,2280
-    def _set_force(self, force):_set_force52,2337
-    def _get_direction(self):_get_direction56,2431
-    def _set_direction(self, direction):_set_direction59,2496
-    def _get_vector(self):_get_vector63,2606
-    x = property(_get_x, _set_x)x66,2665
-    y = property(_get_y, _set_y)y67,2699
-    force = property(_get_force, _set_force)force68,2733
-    direction = property(_get_direction, _set_direction)direction69,2779
-    vector = property(_get_vector)vector70,2837
-    def initialize(self):initialize73,2890
-    def calculate_force_direction(self):calculate_force_direction93,3640
-    def calculate_xy(self):calculate_xy106,4781
-class Drone:Drone114,5167
-    def __init__(self, capacity=100, speed=1., force=1.):__init__115,5181
-    def cost(self, point_a, point_b, wind):cost120,5475
-class Point():Point126,5729
-    def __init__(self, identifier="", x=0., y=0.):__init__127,5745
-    def cost(self, other_point, drone, wind):cost134,6069
-    def __str__(self):__str__138,6276
-    def __repr__(self):__repr__142,6556
-class Client(Point):Client149,7058
-    def __init__(self, identifier="Client", x=0., y=0., demand=0):__init__150,7080
-    def __str__(self):__str__154,7320
-class Depot(Point):Depot160,7634
-    def __init__(self, identifier="Depot", x=0., y=0.):__init__161,7655
-class Delivery:Delivery169,7908
-    def __init__(self, clients_list=list(), depot=None, drone=None, wind=None):__init__171,7927
-        self._clients_list = clients_list   # python list containing instances of class ClientClient173,8010
-            self._depot = depot     # instance of class Depot. A delivery always starts and ends at a depot.Depot178,8185
-            self._drone = drone     # instance of class drone. A delivery is carried out using a drone.drone183,8374
-            self._wind = wind       # instance of class wind. A delivery is performed in a given wind condition.wind188,8555
-    def __str__(self):__str__200,9033
-    def _get_depot(self):_get_depot208,9142
-    def _set_depot(self, depot):_set_depot211,9199
-    def _get_clients_list(self):_get_clients_list217,9402
-    def _set_clients_list(self, clients_list):_set_clients_list220,9473
-    def _get_drone(self):_get_drone226,9712
-    def _set_drone(self, drone):_set_drone229,9769
-    def _get_wind(self):            # just do it the same way as others_get_wind235,9972
-    def _set_wind(self, wind):      #_set_wind239,10088
-    def _get_total_demand(self):_get_total_demand243,10191
-    def _get_total_cost(self):      # total_cost should not be directly set but calculated_get_total_cost249,10268
-    def _get_total_savings(self):   # until here_get_total_savings252,10401
-    depot = property(_get_depot, _set_depot)depot256,10495
-    clients_list = property(_get_clients_list, _set_clients_list)clients_list257,10541
-    drone = property(_get_drone, _set_drone)drone258,10608
-    total_demand = property(_get_total_demand)total_demand259,10654
-    wind = property(_get_wind, _set_wind)   # the same way as otherswind260,10702
-    total_cost = property(_get_total_cost)total_cost261,10772
-    total_savings = property(_get_total_savings)    # as usualtotal_savings262,10816
-    def print_clients_list(self):print_clients_list267,10978
-    def print_depot(self):print_depot272,11165
-    def print_delivery(self):print_delivery275,11223
-    def calculate_total_demand(self):calculate_total_demand285,11684
-    def calculate_total_cost(self):calculate_total_cost294,12153
-    def calculate_total_savings(self):calculate_total_savings305,12935
-    def update(self):update319,13803
-    def check_same_depot(self, other_delivery):check_same_depot324,13944
-    def check_same_drone(self, other_delivery):check_same_drone329,14248
-    def check_same_wind(self, other_delivery):check_same_wind336,14531
-    def check_max_demand(self, other_delivery):check_max_demand343,14810
-    def check_compatibility(self, other_delivery):check_compatibility357,15437
-    def can_merge_left(self, other_delivery, force_common_client=False):can_merge_left364,15794
-    def can_merge_right(self, other_delivery, force_common_client=False):can_merge_right431,20055
-    def can_merge(self, other_delivery, force_common_client=False):can_merge465,21841
-    def merge_left(self, other_delivery, update=True):merge_left470,22088
-    def merge_right(self, other_delivery, update=True):merge_right491,23430
-class Solution:Solution516,25009
-    def __init__(self, name="Unnamed Solution", deliveries_list=list()):__init__518,25028
-    def print(self, detailed=True):print539,25901
-    def __str__(self):__str__548,26306
-    def _get_deliveries_list(self):_get_deliveries_list553,26410
-    def _set_deliveries_list(self, deliveries_list):_set_deliveries_list556,26487
-    def _get_total_cost(self):_get_total_cost561,26669
-    def _get_total_savings(self):_get_total_savings564,26736
-    deliveries_list = property(_get_deliveries_list, _set_deliveries_list)deliveries_list568,26941
-    total_cost = property(_get_total_cost)total_cost569,27017
-    total_savings = property(_get_total_savings)total_savings570,27061
-    def get_drones_list(self):get_drones_list572,27113
-    def get_winds_list(self):get_winds_list575,27217
-    def calculate_total_cost(self):calculate_total_cost578,27319
-    def calculate_total_savings(self):calculate_total_savings585,27701
-class Problem:Problem597,28231
-    def __init__(self, depot=None, clients_list=list()):__init__599,28249
-    def _get_depot(self):_get_depot625,28909
-    def _set_depot(self, depot):_set_depot628,28966
-    def _get_clients_list(self):_get_clients_list632,29069
-    def _set_clients_list(self, clients_list):_set_clients_list635,29140
-    def _get_number_of_generated_clients(self):_get_number_of_generated_clients640,29310
-    def _get_total_demand(self):_get_total_demand643,29411
-    depot = property(_get_depot, _set_depot)depot646,29482
-    clients_list = property(_get_clients_list, _set_clients_list)clients_list647,29528
-    number_of_generated_clients = property(_get_number_of_generated_clients)number_of_generated_clients648,29595
-    total_demand = property(_get_total_demand)total_demand649,29673
-    def print_clients(self):print_clients651,29723
-    def print_depot(self):print_depot655,29825
-    def number_of_clients(self):number_of_clients658,29883
-    def print_solutions(self, detailed=False):print_solutions661,29959
-    def remove_solution_index(self, index):remove_solution_index666,30181
-    def remove_solution_named(self, name):remove_solution_named669,30268
-    def clear_solutions(self):clear_solutions675,30483
-    def calculate_total_demand(self):calculate_total_demand678,30554
-    def generate_random_clients(self, amount=1, x=(-10, 10), y=(-10, 10), demand=(1, 100)):generate_random_clients681,30698
-    def export_csv(self, file_name):export_csv708,32415
-    def import_csv(self, file_name):import_csv740,33855
+    def x(self):x38,2077
+    def x(self, x):x41,2134
+    def y(self):y47,2244
+    def y(self, y):y50,2301
+    def force(self):force57,2417
+    def force(self, force):force60,2486
+    def direction(self):direction67,2609
+    def direction(self, x):direction70,2690
+    def vector(self):vector76,2808
+    def initialize(self):initialize122,3801
+    def calculate_force_direction(self):calculate_force_direction142,4551
+    def calculate_xy(self):calculate_xy155,5692
+class Drone:Drone163,6078
+    def __init__(self, capacity=100, speed=1., force=1.):__init__164,6092
+    def cost(self, point_a, point_b, wind):cost169,6386
+class Point():Point175,6640
+    def __init__(self, identifier="", x=0., y=0.):__init__176,6656
+    def cost(self, other_point, drone, wind):cost183,6980
+    def __str__(self):__str__187,7187
+    def __repr__(self):__repr__191,7467
+class Client(Point):Client198,7969
+    def __init__(self, identifier="Client", x=0., y=0., demand=0):__init__199,7991
+    def __str__(self):__str__203,8231
+class Depot(Point):Depot209,8545
+    def __init__(self, identifier="Depot", x=0., y=0.):__init__210,8566
+class Delivery:Delivery218,8819
+    def __init__(self, clients_list=list(), depot=None, drone=None, wind=None):__init__220,8838
+        self._clients_list = clients_list   # python list containing instances of class ClientClient222,8921
+            self._depot = depot     # instance of class Depot. A delivery always starts and ends at a depot.Depot227,9096
+            self._drone = drone     # instance of class drone. A delivery is carried out using a drone.drone232,9285
+            self._wind = wind       # instance of class wind. A delivery is performed in a given wind condition.wind237,9466
+    def __str__(self):__str__249,9944
+    def depot(self):depot257,10052
+    def depot(self, depot):depot261,10123
+    def clients_list(self):clients_list267,10241
+    def clients_list(self, clients_list):clients_list271,10333
+    def drone(self):drone278,10474
+    def drone(self, drone):drone282,10545
+    def wind(self):            # just do it the same way as otherswind289,10657
+    def wind(self, wind):      #wind293,10784
+    def total_demand(self):total_demand299,10917
+    def total_cost(self):      # total_cost should not be directly set but calculatedtotal_cost304,11016
+    def total_savings(self):   # until heretotal_savings309,11180
+    def print_clients_list(self):print_clients_list315,11282
+    def print_depot(self):print_depot320,11469
+    def print_delivery(self):print_delivery323,11527
+    def calculate_total_demand(self):calculate_total_demand333,11988
+    def calculate_total_cost(self):calculate_total_cost342,12457
+    def calculate_total_savings(self):calculate_total_savings353,13239
+    def update(self):update367,14107
+    def check_same_depot(self, other_delivery):check_same_depot372,14248
+    def check_same_drone(self, other_delivery):check_same_drone377,14538
+    def check_same_wind(self, other_delivery):check_same_wind384,14821
+    def check_max_demand(self, other_delivery):check_max_demand391,15100
+    def check_compatibility(self, other_delivery):check_compatibility405,15727
+    def can_merge_left(self, other_delivery, force_common_client=False):can_merge_left412,16084
+    def can_merge_right(self, other_delivery, force_common_client=False):can_merge_right479,20345
+    def can_merge(self, other_delivery, force_common_client=False):can_merge513,22131
+    def merge_left(self, other_delivery, update=True):merge_left518,22378
+    def merge_right(self, other_delivery, update=True):merge_right539,23720
+class Solution:Solution564,25299
+    def __init__(self, name="Unnamed Solution", deliveries_list=list()):__init__566,25318
+    def print(self, detailed=True):print587,26191
+    def __str__(self):__str__596,26596
+    def deliveries_list(self):deliveries_list607,26725
+    def deliveries_list(self, deliveries_list):deliveries_list611,26826
+    def total_cost(self):total_cost618,27036
+    def total_savings(self):total_savings623,27134
+    def get_drones_list(self):get_drones_list626,27202
+    def get_winds_list(self):get_winds_list629,27306
+    def calculate_total_cost(self):calculate_total_cost632,27408
+    def calculate_total_savings(self):calculate_total_savings639,27790
+class Problem:Problem651,28320
+    def __init__(self, depot=None, clients_list=list()):__init__653,28338
+    def depot(self):depot682,29028
+    def depot(self, depot):depot686,29099
+    def clients_list(self):clients_list692,29232
+    def clients_list(self, clients_list):clients_list696,29324
+    def number_of_generated_clients(self):number_of_generated_clients703,29539
+    def total_demand(self):total_demand708,29670
+    def print_clients(self):print_clients742,30574
+    def print_depot(self):print_depot746,30676
+    def number_of_clients(self):number_of_clients749,30734
+    def print_solutions(self, detailed=False):print_solutions752,30810
+    def remove_solution_index(self, index):remove_solution_index757,31032
+    def remove_solution_named(self, name):remove_solution_named760,31119
+    def clear_solutions(self):clear_solutions766,31334
+    def calculate_total_demand(self):calculate_total_demand769,31405
+    def generate_random_clients(self, amount=1, x=(-10, 10), y=(-10, 10), demand=(1, 100)):generate_random_clients772,31549
+    def export_csv(self, file_name):export_csv799,33262
+    def import_csv(self, file_name):import_csv831,34702
 
-processing.py,1357
+processing.py,1359
 import numpy as npnp2,30
 def calculate_cost_matrix(problem, drone, wind):calculate_cost_matrix5,54
 def calculate_savings_matrix(problem, drone, wind):calculate_savings_matrix17,938
-def _clarke_and_wright_init(problem, drone, wind, name="Unnamed solution"):_clarke_and_wright_init34,1823
-    solution = Solution(name) # create an instance of class SolutionSolution44,2559
-def _get_clients_pair_from_arg(clients_list, arg_k):_get_clients_pair_from_arg53,3096
-def _sequential_merge_if_possible(current_delivery, candidate_delivery):_sequential_merge_if_possible64,3611
-def _sequential_build_deliveries(sorted_savings, arg_sorted_savings, clients_list, depot, drone, wind):_sequential_build_deliveries76,4265
-def _search_deliveries_for_client(client, deliveries_list, left_border=False, interior=False, right_border=False):_search_deliveries_for_client83,4579
-def _parallel_build_deliveries(sorted_savings, arg_sorted_savings, clients_list, depot, drone, wind):_parallel_build_deliveries101,5618
-def _build_deliveries(version, sorted_savings, arg_sorted_savings, clients_list, depot, drone, wind):_build_deliveries108,5928
-def add_single_client_deliveries(problem, deliveries_list, drone, wind):add_single_client_deliveries116,6342
-def clarke_and_wright(problem, drone, wind, version="Sequential", name=None):clarke_and_wright123,6757
+def _clarke_and_wright_init(problem, drone, wind, name = 'Unnamed solution'):_clarke_and_wright_init34,1823
+    solution = Solution(name) # create an instance of class SolutionSolution44,2561
+def _get_clients_pair_from_arg(clients_list, arg_k):_get_clients_pair_from_arg53,3098
+def _sequential_merge_if_possible(current_delivery, candidate_delivery):_sequential_merge_if_possible64,3613
+def _sequential_build_deliveries(sorted_savings, arg_sorted_savings, clients_list, depot, drone, wind):_sequential_build_deliveries76,4267
+def _search_deliveries_for_client(client, deliveries_list, left_border=False, interior=False, right_border=False):_search_deliveries_for_client83,4581
+def _parallel_build_deliveries(sorted_savings, arg_sorted_savings, clients_list, depot, drone, wind):_parallel_build_deliveries101,5620
+def _build_deliveries(version, sorted_savings, arg_sorted_savings, clients_list, depot, drone, wind):_build_deliveries108,5930
+def add_single_client_deliveries(problem, deliveries_list, drone, wind):add_single_client_deliveries116,6344
+def clarke_and_wright(problem, drone, wind, version="Sequential", name=None):clarke_and_wright123,6759

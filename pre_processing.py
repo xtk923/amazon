@@ -31,6 +31,50 @@ class Wind:
         self._vector = None     # numpy array of floats
         self.initialize()
 
+
+    # # x
+    # @property
+    # def x(self):
+    #     return self._x
+    # @x.setter
+    # def x(self, x):
+    #     self._x = x
+    #     self.calculate_force_direction()
+
+    # # y
+    # @property
+    # def y(self):
+    #     return self._y
+    # @y.setter
+    # def y(self, y):
+    #     self._y = y
+    #     self.calculate_force_direction()
+
+
+    # # force
+    # @property
+    # def force(self):
+    #     return self._force
+    # @force.setter
+    # def force(self, force):
+    #     self._force = force
+    #     self.calculate_xy()
+
+
+    # # direction
+    # @property
+    # def direction(self):
+    #     return self._direction
+    # @direction.setter
+    # def direction(self, x):
+    #     self._direction = x
+    #     self.calculate_xy()
+
+    # # vector
+    # @property
+    # def vector(self):
+    #     return self._vector
+
     # getters and setters
     def _get_x(self):
         return self._x
@@ -68,6 +112,8 @@ class Wind:
     force = property(_get_force, _set_force)
     direction = property(_get_direction, _set_direction)
     vector = property(_get_vector)
+
+
 
     # methods
     def initialize(self):
@@ -204,6 +250,63 @@ class Delivery:
         return ""
 
 
+    # # depot
+    # @property
+    # def depot(self):
+    #     return self._depot
+
+    # @depot.setter
+    # def depot(self, depot):
+    #     self._depot = depot
+    #     self.update()
+
+    # # clients_list
+    # @property
+    # def clients_list(self):
+    #     return self._clients_list
+
+    # @clients_list.setter
+    # def clients_list(self, clients_list):
+    #     self._clients_list = clients_list
+    #     self.update()
+
+
+    # # drone
+    # @property
+    # def drone(self):
+    #     return self._drone
+
+    # @drone.setter
+    # def drone(self, drone):
+    #     self._drone = drone
+    #     self.update()
+
+
+    # # wind
+    # @property
+    # def wind(self):            # just do it the same way as others
+    #     return self._wind           #
+
+    # @wind.setter
+    # def wind(self, wind):      #
+    #     self._wind = wind           #
+    #     self.update()
+
+    # # total_demand
+    # @property
+    # def total_demand(self):
+    #     return self._total_demand
+
+    # # total_cost
+    # @property
+    # def total_cost(self):      # total_cost should not be directly set but calculated
+    #     return self._total_cost     #
+
+    # # total_savings
+    # @property
+    # def total_savings(self):   # until here
+    #     return self._total_savings
+
     # getters and setters
     def _get_depot(self):
         return self._depot
@@ -260,8 +363,8 @@ class Delivery:
     wind = property(_get_wind, _set_wind)   # the same way as others
     total_cost = property(_get_total_cost)
     total_savings = property(_get_total_savings)    # as usual
-    
-    # define here the 'wind', 'total_cost' and 'total_savings' properties
+   
+
 
     # methods
     def print_clients_list(self):
@@ -323,7 +426,7 @@ class Delivery:
 
     def check_same_depot(self, other_delivery):
         # this method should return true if this delivery has the same depot as other_delivery and false otherwise
-        return self._get_depot() == other_delivery._get_depot()
+        return self.depot == other_delivery.depot
         # return self._get_depot().__eq__(other_delivery._get_depot())
 
     def check_same_drone(self, other_delivery):
@@ -549,6 +652,7 @@ class Solution:
         self.print(detailed=False)
         return ""
 
+
 # getters and setters
     def _get_deliveries_list(self):
         return self._deliveries_list
@@ -568,6 +672,31 @@ class Solution:
     deliveries_list = property(_get_deliveries_list, _set_deliveries_list)
     total_cost = property(_get_total_cost)
     total_savings = property(_get_total_savings)
+
+
+
+
+
+    # # deliveries_list
+    # @property
+    # def deliveries_list(self):
+    #     return self._deliveries_list
+
+    # @deliveries_list.setter
+    # def deliveries_list(self, deliveries_list):
+    #     self._deliveries_list = deliveries_list
+    #     self.calculate_total_cost()
+    #     self.calculate_total_savings()
+
+    # # total_cost
+    # @property
+    # def total_cost(self):
+    #     return self._total_cost
+
+    # # total_savings
+    # @property
+    # def total_savings(self):
+    #     return self._total_savings
 
     def get_drones_list(self):
         return [delivery.drone for delivery in self.deliveries_list]
@@ -622,6 +751,42 @@ class Problem:
 
         self.calculate_total_demand()
 
+
+    # depot
+    @property
+    def depot(self):
+        return self._depot
+
+    @depot.setter
+    def depot(self, depot):
+        self._depot = depot
+        self.solutions_list = list()
+
+    # clients_list
+    @property
+    def clients_list(self):
+        return self._clients_list
+
+    @clients_list.setter
+    def clients_list(self, clients_list):
+        self._clients_list = clients_list
+        self.solutions_list = list()
+        self.calculate_total_demand()
+
+    # number_of_generated_clients
+    @property
+    def number_of_generated_clients(self):
+        return self._number_of_generated_clients
+
+    # total_demand
+    @property
+    def total_demand(self):
+        return self._total_demand
+
+
+
+
+    '''
     def _get_depot(self):
         return self._depot
 
@@ -647,6 +812,7 @@ class Problem:
     clients_list = property(_get_clients_list, _set_clients_list)
     number_of_generated_clients = property(_get_number_of_generated_clients)
     total_demand = property(_get_total_demand)
+    '''
 
     def print_clients(self):
         for client in self._clients_list:

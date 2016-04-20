@@ -1,13 +1,17 @@
 from pre_processing import *
 from processing import *
 from post_processing import *
-from unit_tests.test import test
 import unittest
+
+
+
+
 
 class MyUnit_Test(unittest.TestCase):
     def setUp(self):
     # to compare two values to only 2 decimal places,
     # this avoids error due to fractions or roots are hangded as decimals
+        self.wind0 = Wind(0.4, 0)
         self.wind1 = Wind(1,1)
         self.wind2 = Wind(2,2)
         self.wind3 = Wind(3,3)
@@ -15,39 +19,47 @@ class MyUnit_Test(unittest.TestCase):
         self.wind5 = Wind(5,5)
         self.wind6 = Wind(6,6)
 
-        self.drone100 = Drone(capacity=100)
+        self.drone100 = Drone(capacity=100, speed = 1, force =1)
 
 
         self.depot0 = Depot(x = 0, y = 0)
         self.depot1 = Depot(x = 1, y = 2)
 
 
-        self.client1 = Client(identifier="client1", x =1 , y =1 , demand = 1)
-        self.client2 = Client(identifier="client2", x =2 , y =2 , demand = 2)
+        self.client1 = Client(identifier="client1", x =1 , y =6 , demand = 1)
+        self.client2 = Client(identifier="client2", x =8 , y =2 , demand = 2)
         self.client3 = Client(identifier="client3", x =3 , y =3 , demand = 3)
-        self.client4 = Client(identifier="client4", x =4 , y =4 , demand = 4)
+        self.client4 = Client(identifier="client4", x =4 , y =3 , demand = 4)
         self.client5 = Client(identifier="client5", x =5 , y =5 , demand = 5)
-        self.client6 = Client(identifier="client6", x =6 , y =6 , demand = 6)
-        self.client7 = Client(identifier="client7", x =7 , y =7 , demand = 7)
+        self.client6 = Client(identifier="client6", x =1 , y =6 , demand = 6)
+        self.client7 = Client(identifier="client7", x =7 , y =8 , demand = 7)
         self.client8 = Client(identifier="client8", x =8 , y =8 , demand = 8)
-        self.client9 = Client(identifier="client9", x =9 , y =9 , demand = 9)
+        self.client9 = Client(identifier="client9", x =9 , y =0 , demand = 9)
         self.client10 = Client(identifier="client10", x =9 , y =9 , demand = 10)
         self.client11 = Client(identifier="client11", x =1 , y =1 , demand = 11)
         self.client12 = Client(identifier="client12", x =2 , y =2 , demand = 12)
-        self.client13 = Client(identifier="client13", x =3 , y =3 , demand = 13)
+        self.client13 = Client(identifier="client13", x =13 , y =3 , demand = 13)
         self.client14 = Client(identifier="client14", x =4 , y =4 , demand = 14)
         self.client15 = Client(identifier="client15", x =5 , y =5 , demand = 15)
         self.client16 = Client(identifier="client16", x =6 , y =6 , demand = 16)
-        self.client17 = Client(identifier="client17", x =7 , y =7 , demand = 17)
+        self.client17 = Client(identifier="client17", x =7 , y =6 , demand = 17)
         self.client18 = Client(identifier="client18", x =8 , y =8 , demand = 18)
         self.client19 = Client(identifier="client19", x =9 , y =9 , demand = 19)
-        self.client20 = Client(identifier="client20",x =10 , y =10 , demand = 20)
+        self.client20 = Client(identifier="client20",x =18 , y =10 , demand = 20)
+        self.client30 = Client(identifier="client30",x =37 , y =10 , demand = 30)
+        self.client40 = Client(identifier="client40",x =108 , y =10 , demand = 40)
+        self.client50 = Client(identifier="client50",x =18 , y =10 , demand = 50)
+        self.client60 = Client(identifier="client60",x =38 , y =-100, demand = 60)
+        self.client70 = Client(identifier="client70",x =18 , y =10 , demand = 70)
+        self.client80 = Client(identifier="client80",x =58 , y =120 , demand = 80)
+        self.client90 = Client(identifier="client90",x =18 , y =10 , demand = 90)
+        self.client100 = Client(identifier="client100",x =18 , y =10 , demand = 100)
 
 
 
         self.delivery1 = Delivery(clients_list = [self.client1, self.client10, self.client18], depot = self.depot0, drone = self.drone100, wind = self.wind1)
         self.delivery2 = Delivery(clients_list = [self.client2, self.client20, self.client17], depot = self.depot0, drone = self.drone100, wind = self.wind1)
-        self.delivery3 = Delivery(clients_list = [self.client3, self.client13, self.client15], depot = self.depot0, drone = self.drone100, wind = self.wind1)
+        self.delivery3 = Delivery(clients_list = [self.client3, self.client13, self.client15, self.client1], depot = self.depot0, drone = self.drone100, wind = self.wind1)
         self.delivery4 = Delivery(clients_list = [self.client10, self.client13, self.client15, self.client17, self.client19, self.client20], depot = self.depot0, drone = self.drone100, wind = self.wind1)
 
 
@@ -74,7 +86,30 @@ class MyUnit_Test(unittest.TestCase):
                                                 self.client17,
                                                 self.client18,
                                                 self.client19,
-                                                self.client20])
+                                                self.client20,
+                                                self.client30,
+                                                self.client40,
+                                                self.client50,
+                                                self.client60,
+                                                self.client70,
+                                                self.client80,
+                                                self.client90,
+                                                self.client100])
+
+
+
+
+
+
+
+
+
+
+        self.problem2 = Problem(clients_list = [self.client1,
+                                                self.client2,
+                                                self.client3,
+                                                self.client4,
+                                                self.client5])
 
 
 
@@ -182,8 +217,8 @@ class MyUnit_Test(unittest.TestCase):
     def test_Delivery_set_depot(self):
         delivery = Delivery()
         depot = Depot(x = 1, y = 2)
-        delivery._set_depot(depot)
-        self.assertEqual(depot, delivery._get_depot())
+        delivery.depot=depot
+        self.assertEqual(depot, delivery.depot)
 
     def test_Delivery_set_client(self):
         delivery = Delivery()
@@ -191,20 +226,20 @@ class MyUnit_Test(unittest.TestCase):
         client2 = Client("dummy client", x = 10, y = 2, demand = 20)
         client3 = Client("dummy client", x = 10, y = 3, demand = 30)
         clients_list = [client1, client2, client3]
-        delivery._set_clients_list(clients_list)
-        self.assertEqual(clients_list, delivery._get_clients_list())
+        delivery.clients_list=clients_list
+        self.assertEqual(clients_list, delivery.clients_list)
 
     def test_Delivery_set_drone(self):
         delivery = Delivery()
         drone = Drone(capacity=80)
-        delivery._set_drone(drone)
-        self.assertEqual(drone, delivery._get_drone())
+        delivery.drone=drone
+        self.assertEqual(drone, delivery.drone)
 
     def test_Delivery_attribute_wind(self):
         delivery = Delivery()
         wind = Wind(direction=10)
-        delivery._set_wind(wind)
-        self.assertEqual(wind, delivery._get_wind())
+        delivery.wind=wind
+        self.assertEqual(wind, delivery.wind)
 
     def test_Delivery_attribute_total_cost(self):
         delivery = Delivery()
@@ -212,9 +247,9 @@ class MyUnit_Test(unittest.TestCase):
         client2 = Client("dummy client", x = 10, y = 2, demand = 20)
         client3 = Client("dummy client", x = 10, y = 3, demand = 30)
         clients_list = [client1, client2, client3]
-        delivery._set_clients_list(clients_list)
+        delivery.clients_list=clients_list
         delivery.calculate_total_cost()
-        self.assertEqual(delivery.total_cost, delivery._get_total_cost())
+        self.assertEqual(delivery.total_cost, delivery.total_cost)
 
     def test_Delivery_attribute_total_savings(self):
         delivery = Delivery()
@@ -222,9 +257,9 @@ class MyUnit_Test(unittest.TestCase):
         client2 = Client("dummy client", x = 10, y = 2, demand = 20)
         client3 = Client("dummy client", x = 10, y = 3, demand = 30)
         clients_list = [client1, client2, client3]
-        delivery._set_clients_list(clients_list)
+        delivery.clients_list=clients_list
         delivery.calculate_total_savings()
-        self.assertEqual(delivery.total_savings, delivery._get_total_savings())
+        self.assertEqual(delivery.total_savings, delivery.total_savings)
 
 
 # Q8: Delivery.check_same_depot()
@@ -266,19 +301,19 @@ class MyUnit_Test(unittest.TestCase):
         delivery1 = Delivery(clients_list=clients_list1)
         delivery2 = Delivery(clients_list=clients_list2)
         # every attribute other than clients_list is identical
-        delivery1._set_wind(self.wind1)
-        delivery2._set_wind(self.wind1)
-        delivery1._set_drone(self.drone100)
-        delivery2._set_drone(self.drone100)
-        delivery1._set_depot(self.depot0)
-        delivery2._set_depot(self.depot0)
+        delivery1.wind=self.wind1
+        delivery2.wind=self.wind1
+        delivery1.drone=self.drone100
+        delivery2.drone=self.drone100
+        delivery1.depot=self.depot0
+        delivery2.depot=self.depot0
         self.assertTrue(delivery1.can_merge_left(delivery2))
         self.assertFalse(delivery1.can_merge_left(delivery2, force_common_client=True))
         delivery3 = Delivery()
-        delivery3._set_clients_list([self.client3, self.client1])
-        delivery3._set_wind(self.wind1)
-        delivery3._set_drone(self.drone100)
-        delivery3._set_depot(self.depot0)
+        delivery3.clients_list=[self.client3, self.client1]
+        delivery3.wind=self.wind1
+        delivery3.drone=self.drone100
+        delivery3.depot=self.depot0
         self.assertTrue(delivery1.can_merge_left(delivery3))
         self.assertTrue(delivery1.can_merge_left(delivery3, force_common_client=True))
 
@@ -289,19 +324,19 @@ class MyUnit_Test(unittest.TestCase):
         delivery1 = Delivery(clients_list=clients_list1)
         delivery2 = Delivery(clients_list=clients_list2)
         # every attribute other than clients_list is identical
-        delivery1._set_wind(self.wind1)
-        delivery2._set_wind(self.wind1)
-        delivery1._set_drone(self.drone100)
-        delivery2._set_drone(self.drone100)
-        delivery1._set_depot(self.depot0)
-        delivery2._set_depot(self.depot0)
+        delivery1.wind=self.wind1
+        delivery2.wind=self.wind1
+        delivery1.drone=self.drone100
+        delivery2.drone=self.drone100
+        delivery1.depot=self.depot0
+        delivery2.depot=self.depot0
         self.assertTrue(delivery1.can_merge_right(delivery2))
         self.assertFalse(delivery1.can_merge_right(delivery2, force_common_client=True))
         delivery3 = Delivery()
-        delivery3._set_clients_list([self.client2, self.client3])
-        delivery3._set_wind(self.wind1)
-        delivery3._set_drone(self.drone100)
-        delivery3._set_depot(self.depot0)
+        delivery3.clients_list=[self.client2, self.client3]
+        delivery3.wind=self.wind1
+        delivery3.drone=self.drone100
+        delivery3.depot=self.depot0
         self.assertTrue(delivery1.can_merge_right(delivery3))
         self.assertTrue(delivery1.can_merge_right(delivery3, force_common_client=True))
 
@@ -391,60 +426,60 @@ class MyUnit_Test(unittest.TestCase):
         clients_list2 = [self.client3, self.client4]
         delivery1 = Delivery(clients_list=clients_list1)
         delivery2 = Delivery(clients_list=clients_list2)
-        delivery1._set_wind(self.wind1)
-        delivery2._set_wind(self.wind1)
-        delivery1._set_drone(self.drone100)
-        delivery2._set_drone(self.drone100)
-        delivery1._set_depot(self.depot0)
-        delivery2._set_depot(self.depot0)
+        delivery1.wind=self.wind1
+        delivery2.wind=self.wind1
+        delivery1.drone=self.drone100
+        delivery2.drone=self.drone100
+        delivery1.depot=self.depot0
+        delivery2.depot=self.depot0
         delivery1.merge_right(delivery2, update=True)
-        cost_by_hand = delivery1._get_depot().cost(self.client1, delivery1._get_drone(), delivery1._get_wind())
-        cost_by_hand += self.client1.cost(self.client2, delivery1._get_drone(), delivery1._get_wind())
-        cost_by_hand += self.client2.cost(self.client3, delivery1._get_drone(), delivery1._get_wind())
-        cost_by_hand += self.client3.cost(self.client4, delivery1._get_drone(), delivery1._get_wind())
-        cost_by_hand += self.client4.cost(delivery1._get_depot(), delivery1._get_drone(), delivery1._get_wind())
+        cost_by_hand = delivery1.depot.cost(self.client1, delivery1.drone, delivery1.wind)
+        cost_by_hand += self.client1.cost(self.client2, delivery1.drone, delivery1.wind)
+        cost_by_hand += self.client2.cost(self.client3, delivery1.drone, delivery1.wind)
+        cost_by_hand += self.client3.cost(self.client4, delivery1.drone, delivery1.wind)
+        cost_by_hand += self.client4.cost(delivery1.depot, delivery1.drone, delivery1.wind)
 
-        naive_cost = delivery2._get_depot().cost(self.client3, delivery2._get_drone(), delivery2._get_wind())
-        naive_cost += self.client3.cost(delivery2._get_depot(), delivery2._get_drone(), delivery2._get_wind())
-        naive_cost += delivery2._get_depot().cost(self.client4, delivery2._get_drone(), delivery2._get_wind())
-        naive_cost += self.client4.cost(delivery2._get_depot(), delivery2._get_drone(), delivery2._get_wind())
-        naive_cost += delivery1._get_depot().cost(self.client1, delivery1._get_drone(), delivery1._get_wind())
-        naive_cost += self.client1.cost(delivery1._get_depot(), delivery1._get_drone(), delivery1._get_wind())
-        naive_cost += delivery1._get_depot().cost(self.client2, delivery1._get_drone(), delivery1._get_wind())
-        naive_cost += self.client2.cost(delivery1._get_depot(), delivery1._get_drone(), delivery1._get_wind())
+        naive_cost = delivery2.depot.cost(self.client3, delivery2.drone, delivery2.wind)
+        naive_cost += self.client3.cost(delivery2.depot, delivery2.drone, delivery2.wind)
+        naive_cost += delivery2.depot.cost(self.client4, delivery2.drone, delivery2.wind)
+        naive_cost += self.client4.cost(delivery2.depot, delivery2.drone, delivery2.wind)
+        naive_cost += delivery1.depot.cost(self.client1, delivery1.drone, delivery1.wind)
+        naive_cost += self.client1.cost(delivery1.depot, delivery1.drone, delivery1.wind)
+        naive_cost += delivery1.depot.cost(self.client2, delivery1.drone, delivery1.wind)
+        naive_cost += self.client2.cost(delivery1.depot, delivery1.drone, delivery1.wind)
 
         savings_by_hand = naive_cost - cost_by_hand
 
         # test for update case
-        self.assertTrue(delivery1._get_clients_list() == [self.client1, self.client2, self.client3, self.client4])
-        self.assertTrue(delivery1._get_total_demand() == 10)
-        self.assertTrue(self.equal2(delivery1._get_total_cost(), cost_by_hand))
-        self.assertTrue(self.equal2(delivery1._get_total_savings(), savings_by_hand))
+        self.assertTrue(delivery1.clients_list == [self.client1, self.client2, self.client3, self.client4])
+        self.assertTrue(delivery1.total_demand == 10)
+        self.assertTrue(self.equal2(delivery1.total_cost, cost_by_hand))
+        self.assertTrue(self.equal2(delivery1.total_savings, savings_by_hand))
 
         # create delivery3 which is identical to delivery1 before merge
         delivery3 = Delivery(clients_list = clients_list1)
-        delivery3._set_wind(self.wind1)
-        delivery3._set_drone(self.drone100)
-        delivery3._set_depot(self.depot0)
-        cost3 = delivery3._get_total_cost()
-        savings3 = delivery3._get_total_savings()
+        delivery3.wind = self.wind1
+        delivery3.drone = self.drone100
+        delivery3.depot = self.depot0
+        cost3 = delivery3.total_cost
+        savings3 = delivery3.total_savings
         delivery3.merge_right(delivery2, update= False)
-        self.assertTrue(delivery3._get_clients_list() == [self.client1, self.client2, self.client3, self.client4])
-        self.assertTrue(delivery3._get_total_demand() == 10)
-        self.assertTrue(self.equal2(delivery3._get_total_cost(), cost3))
-        self.assertTrue(self.equal2(delivery3._get_total_savings(), savings3))
+        self.assertTrue(delivery3.clients_list == [self.client1, self.client2, self.client3, self.client4])
+        self.assertTrue(delivery3.total_demand == 10)
+        self.assertTrue(self.equal2(delivery3.total_cost, cost3))
+        self.assertTrue(self.equal2(delivery3.total_savings, savings3))
 
 
     # test for common client case
     def test_Delivery_merge_right_common_client(self):
         delivery1 = Delivery(clients_list = [self.client2, self.client3])
-        delivery1._set_wind(self.wind1)
-        delivery1._set_drone(self.drone100)
-        delivery1._set_depot(self.depot0)
+        delivery1.wind = self.wind1
+        delivery1.drone = self.drone100
+        delivery1.depot = self.depot0
         delivery2 = Delivery(clients_list= [self.client1, self.client2])
-        delivery1._set_wind(self.wind1)
-        delivery1._set_drone(self.drone100)
-        delivery1._set_depot(self.depot0)
+        delivery1.wind = self.wind1
+        delivery1.drone = self.drone100
+        delivery1.depot = self.depot0
 
         delivery2.merge_right(delivery1)
         self.assertTrue(delivery2._clients_list == [self.client1, self.client2, self.client3])
@@ -472,7 +507,7 @@ class MyUnit_Test(unittest.TestCase):
 # Q18: Problem.calculate_total_demand()
     def test_Problem_calculate_total_demand(self):
         self.problem1.calculate_total_demand()
-        self.assertEqual(self.problem1._total_demand, 210)
+        self.assertEqual(self.problem1._total_demand, 730)
 
 # Q19: Problem.generate_random_clients()
     def test_Problem_generate_random_clients(self):
@@ -537,7 +572,9 @@ class MyUnit_Test(unittest.TestCase):
                         )
                     )
 
+
 # Q22: _clarke_and_wright_init()
+    '''
     def test_clarke_and_wright_init(self):
         sorted, args = _clarke_and_wright_init(self.problem1, self.drone100, self.wind1, name='Some name')
         for i in range(len(sorted)-1):
@@ -545,7 +582,7 @@ class MyUnit_Test(unittest.TestCase):
             self.assertTrue
             (
                 (cost(
-                    _get_clients_pair_from_arg(self.problem1._clients_list, args[i])[0],
+                    _get_cients_pair_from_arg(self.problem1._clients_list, args[i])[0],
                     self.problem1._depot,
                     self.drone100,
                     self.wind1
@@ -588,15 +625,30 @@ class MyUnit_Test(unittest.TestCase):
                     )
                 )
             )
+    '''
+
+
+    '''
+The test of function prefixed with _ will have to use
+this private function which is only accessibile inside the module processing.py.
+Therefore, standalone unittests cannot be written for them.
+    '''
+# Q22, Q23, Q24, Q25
+    def test_clarke_and_wright(self):
+        problem = Problem()
+        problem.import_csv("Test50.csv")
+        clarke_and_wright(problem, self.drone100, self.wind0)
+        # test that there's no repeat nor missing of clients in the deliveries_list
+        delivery_length = 0
+        for delivery in self.problem1.solutions_list[-1].deliveries_list:
+            delivery_length += len(delivery.clients_list)
+        self.assertTrue(delivery_length == len(self.problem1.clients_list))
 
 
 
 
 
 
-# Q23: _sequential_build_deliveries()
-    def test_sequential_build_deliveries(self):
-        pass
 
 
 
@@ -607,19 +659,5 @@ class MyUnit_Test(unittest.TestCase):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-test()
-
-
-if __name__ == '__main__':
+#if __name__ == '__main__':
 unittest.main()
