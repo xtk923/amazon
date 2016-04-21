@@ -752,41 +752,40 @@ class Problem:
         self.calculate_total_demand()
 
 
-    # depot
-    @property
-    def depot(self):
-        return self._depot
+    # # depot
+    # @property
+    # def depot(self):
+    #     return self._depot
 
-    @depot.setter
-    def depot(self, depot):
-        self._depot = depot
-        self.solutions_list = list()
+    # @depot.setter
+    # def depot(self, depot):
+    #     self._depot = depot
+    #     self.solutions_list = list()
 
-    # clients_list
-    @property
-    def clients_list(self):
-        return self._clients_list
+    # # clients_list
+    # @property
+    # def clients_list(self):
+    #     return self._clients_list
 
-    @clients_list.setter
-    def clients_list(self, clients_list):
-        self._clients_list = clients_list
-        self.solutions_list = list()
-        self.calculate_total_demand()
+    # @clients_list.setter
+    # def clients_list(self, clients_list):
+    #     self._clients_list = clients_list
+    #     self.solutions_list = list()
+    #     self.calculate_total_demand()
 
-    # number_of_generated_clients
-    @property
-    def number_of_generated_clients(self):
-        return self._number_of_generated_clients
+    # # number_of_generated_clients
+    # @property
+    # def number_of_generated_clients(self):
+    #     return self._number_of_generated_clients
 
-    # total_demand
-    @property
-    def total_demand(self):
-        return self._total_demand
-
-
+    # # total_demand
+    # @property
+    # def total_demand(self):
+    #     return self._total_demand
 
 
-    '''
+
+
     def _get_depot(self):
         return self._depot
 
@@ -812,7 +811,6 @@ class Problem:
     clients_list = property(_get_clients_list, _set_clients_list)
     number_of_generated_clients = property(_get_number_of_generated_clients)
     total_demand = property(_get_total_demand)
-    '''
 
     def print_clients(self):
         for client in self._clients_list:
@@ -936,3 +934,5 @@ class Problem:
                         demand = int(cells[4])
                         clients_list.append(Client(identifier, x, y, demand))
         self.clients_list = clients_list
+        input_csv.close()
+

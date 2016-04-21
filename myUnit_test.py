@@ -634,16 +634,43 @@ this private function which is only accessibile inside the module processing.py.
 Therefore, standalone unittests cannot be written for them.
     '''
 # Q22, Q23, Q24, Q25
-    def test_clarke_and_wright(self):
+    def test_clarke_and_wright_sequential(self):
         problem = Problem()
         problem.import_csv("Test50.csv")
-        clarke_and_wright(problem, self.drone100, self.wind0)
+        clarke_and_wright(problem, self.drone100, self.wind0, version="Sequential")
         # test that there's no repeat nor missing of clients in the deliveries_list
         delivery_length = 0
-        for delivery in self.problem1.solutions_list[-1].deliveries_list:
+        for delivery in problem.solutions_list[-1].deliveries_list:
             delivery_length += len(delivery.clients_list)
-        self.assertTrue(delivery_length == len(self.problem1.clients_list))
+        self.assertTrue(delivery_length == len(problem.clients_list))
 
+
+    def test_clarke_and_wright_parallel(self):
+        problem = Problem()
+        problem.import_csv("Test50.csv")
+        clarke_and_wright(problem, self.drone100, self.wind0, version="Parallel")
+        # test that there's no repeat nor missing of clients in the deliveries_list
+        delivery_length = 0
+        for delivery in problem.solutions_list[-1].deliveries_list:
+            delivery_length += len(delivery.clients_list)
+            identity_list = list()
+            for client in delivery.clients_list:
+                identity_list.append(client.identifier)
+            print(identity_list)
+        print(delivery_length, len(problem.clients_list))
+        self.assertTrue(delivery_length == len(problem.clients_list))
+
+        # clarke_and_wright(self.problem2, self.drone100, self.wind0, version="Parallel")
+        # # test that there's no repeat nor missing of clients in the deliveries_list
+        # delivery_length = 0
+        # for delivery in self.problem2.solutions_list[-1].deliveries_list:
+        #     delivery_length += len(delivery.clients_list)
+        #     identity_list = list()
+        #     for client in delivery.clients_list:
+        #         identity_list.append(client.identifier)
+        #     print(identity_list)
+        # print(delivery_length, len(self.problem2.clients_list))
+        # self.assertTrue(delivery_length == len(self.problem2.clients_list))
 
 
 

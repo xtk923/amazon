@@ -159,7 +159,98 @@ def _parallel_build_deliveries(sorted_savings, arg_sorted_savings, clients_list,
     # This function should return a list of instances of class Delivery calculated with the use of the parallel Clarke
     # and Wright algorithm.
     deliveries_list = []
+    # create a list of indices to let the algorithm run in order
+    idx_list = list(range(len(sorted_savings)))
+    # we need to check from the highest saving
+    idx_list.reverse()
+    i = 0
+    while i <= len(idx_list):
+        merged = False
+        # only join those that give positive savings
+        if sorted_savings[idx_list[i]] <= 0:
+            break
+        else:
+            # extract the pair of clients
+            pair = list(_get_clients_pair_from_arg(clients_list, arg_sorted_savings[idx_list[i]]))
+            # create a delivery accordingly
+            delivery_from_pair = Delivery(clients_list = pair, depot = depot, drone = drone, wind = wind)
+            # initiate two boolean checkers
+            # have_on_left checks if there exists any delivery whose left border client is the second client
+            # of the pair
+            # have_on_right checks if there exists any delivery whose right border client is the first client
+            # of the pair
+            have_on_left = False
+            have_on_right = False
+            have_in_middle = False
+            same_side = False
+            for delivery in deliveries_list:
+                # since _search_deliveries_for_client() returns a tuple, we need to check the first item
+                # which is a boolean
+                # and use the second item which is the delivery
+                left_tuple = _search_deliveries_for_client(pair[1], deliveries_list, left_border=True)
+                if left_tuple[0]:
+                    have_on_left = True
+                    # if the delivery has a client on its left border who is the second client in the pair
+                    # this delivery will be put on right during merge
+                    delivery_on_right = left_tuple[1]
+                # similarly for right_tuple
+                right_tuple = _search_deliveries_for_client(pair[0], deliveries_list, right_border=True)
+                if right_tuple[0]:
+                    have_on_right = True
+                    delivery_on_left = right_tuple[1]
+                if _search_deliveries_for_client(pair[0], deliveries_list, interior=True)[0]:
+                    have_in_middle = True
+                elif _search_deliveries_for_client(pair[1], deliveries_list, interior=True)[0]:
+                    have_in_middle = True
+                if _search_deliveries_for_client(pair[0], deliveries_list, left_border=True)[0]:
+                    same_side = True
+                elif _search_deliveries_for_client(pair[1], deliveries_list, right_border=True)[0]:
+                    same_side = True
+
+
+            # the following will only be carried out if the pair of clients is not in the middle of a delivery
+            # nor on the same side
+            if not have_in_middle and not same_side:
+                # if the pair of clients have nothing in common with the deliveries_list,
+                # just append it to the deliveries_list
+                if not have_on_left and not have_on_right:
+                    deliveries_list.append(delivery_from_pair)
+                    # toggle the merged checker to True
+                    merged = True
+
+                # if the pair of clients have common clients on both sides with the deliveries_list,
+                # we merge the two existing deliveries.
+                elif have_on_left and have_on_right:
+                    # note that such merge might fail because of the capacity of the drone
+                    if delivery_on_left.can_merge_right(delivery_on_right):
+                        # we merge the second delivery in the list to the first
+                        # then remove the second delivery
+                        if deliveries_list.index(delivery_on_left) < deliveries_list.index(delivery_on_right):
+                            delivery_on_left.merge_right(delivery_on_right)
+                            deliveries_list.remove(delivery_on_right)
+                            merged = True
+                        else:
+                            delivery_on_right.merge_left(delivery_on_left)
+                            deliveries_list.remove(delivery_on_left)
+                            merged = True
+                # if only one client is in common, we try to merge the pair to the delivery
+                elif have_on_left and not have_on_right:
+                    if delivery_on_right.can_merge_left(delivery_from_pair):
+                        # merge the delivery_from_pair to the delivery in the deliveries_list
+                        # so that the order is not changed
+                        delivery_on_right.merge_left(delivery_from_pair)
+                        merged = True
+                elif have_on_right and not have_on_left:
+                    if delivery_on_left.can_merge_right(delivery_from_pair):
+                        delivery_on_left.merge_right(delivery_from_pair)
+                        merged = True
+        if merged:
+            i+=1
+        else:
+            idx_list.remove(idx_list[i])
+
     return deliveries_list
+
 
 
 def _build_deliveries(version, sorted_savings, arg_sorted_savings, clients_list, depot, drone, wind):
